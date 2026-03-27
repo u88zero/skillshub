@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#facc15"/>
+      <stop offset="50%" style="stop-color:#fbbf24"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="goldLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef9c3"/>
+      <stop offset="100%" style="stop-color:#fde047"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer rounded square -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#gold)"/>
+  <!-- Inner dark area -->
+  <rect x="5" y="5" width="54" height="54" rx="13" fill="#0c0c0e"/>
+  <!-- Grid of skill cards - 3x3 subtle blocks -->
+  <rect x="11" y="11" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.8"/>
+  <rect x="26" y="11" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="41" y="11" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.4"/>
+  <rect x="11" y="26" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.5"/>
+  <rect x="26" y="26" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.9"/>
+  <rect x="41" y="26" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="11" y="41" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.3"/>
+  <rect x="26" y="41" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.7"/>
+  <rect x="41" y="41" width="12" height="12" rx="3" fill="#1a1a2e" opacity="0.5"/>
+  <!-- Lightning bolt / S symbol in center -->
+  <text x="32" y="43" text-anchor="middle" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="url(#gold)" letter-spacing="-1.5">S</text>
+</svg>

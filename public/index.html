@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=SF+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-logo">
+        <img class="header-logo-icon" src="logo.svg" alt="Skills Hub" width="36" height="36">
+        <div>
+          <h1>Skills Hub</h1>
+          <div class="header-subtitle">本地技能管理中心</div>
+        </div>
+      </div>
+      <div class="header-stats" id="headerStats"></div>
+      <input type="text" id="searchInput" placeholder="搜索技能（按 / 聚焦）..." autocomplete="off" aria-label="搜索技能名称或描述">
+    </div>
+  </header>
+
+  <nav id="tagBar">
+    <div class="tag-inner" id="tagList"></div>
+  </nav>
+
+  <main>
+    <!-- Loading 态 -->
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">加载技能库...</div>
+    </div>
+
+    <section id="favoritesSection" class="skill-section" style="display:none">
+      <div class="section-header">
+        <span class="star">★</span> 收藏
+        <span class="section-count" id="favCount">0</span>
+      </div>
+      <div class="skill-grid" id="favoritesGrid"></div>
+    </section>
+
+    <section class="skill-section">
+      <div class="section-header">
+        全部技能
+        <span class="section-count" id="totalCount">0</span>
+      </div>
+      <div class="skill-grid" id="skillsGrid"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- 详情弹窗 -->
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal" id="skillModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+      <div class="modal-header">
+        <div class="modal-title-row">
+          <span class="modal-skill-name" id="modalName"></span>
+          <span class="version" id="modalVersion"></span>
+          <span class="invocable-badge" id="modalInvocable" style="display:none">/调用</span>
+        </div>
+        <button class="modal-close" id="modalClose" aria-label="关闭">✕</button>
+      </div>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-tags" id="modalTags"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-actions">
+        <button class="copy-btn" id="modalCopy" data-skill="">复制 /—</button>
+        <button class="expand-btn" id="modalRawBtn">查看源码</button>
+      </div>
+      <div class="modal-raw" id="modalRaw" style="display:none">
+        <pre id="modalRawContent"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
