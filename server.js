@@ -159,6 +159,146 @@ const CHINESE_DESCS = {
   'minimax-skills:react-native-dev': 'React Native 和 Expo 开发指南。',
 };
 
+// HTML 转义，防止 <input> 等参数名被解析为 HTML 标签
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// 参数描述中文映射
+const CHINESE_PARAMS = {
+  'baoyu-comic': {
+    '--art': '艺术风格',
+    '--tone': '基调/氛围',
+    '--layout': '分镜布局',
+    '--aspect': '页面比例',
+    '--lang': '输出语言',
+    '--storyboard-only': '仅生成故事板',
+    '--prompts-only': '生成故事板+提示词',
+    '--images-only': '从已有提示词生成图片',
+    '--regenerate N': '重新生成指定页面',
+  },
+  'baoyu-compress-image': {
+    '<input>': '输入文件或目录',
+    '--output': '输出路径',
+    '--format': '输出格式（webp/png/jpeg）',
+    '--quality': '质量 0-100',
+    '--keep': '保留原文件',
+    '--recursive': '递归处理子目录',
+    '--json': 'JSON 输出',
+  },
+  'baoyu-cover-image': {
+    '--type <name>': '封面类型',
+    '--palette <name>': '配色方案',
+    '--rendering <name>': '渲染风格',
+    '--style <name>': '艺术风格',
+    '--text <level>': '文字排版',
+    '--mood <level>': '基调强度',
+    '--font <name>': '字体风格',
+    '--aspect <ratio>': '图片比例',
+    '--lang <code>': '标题语言',
+    '--no-title': '无文字模式',
+    '--quick': '跳过确认',
+    '--ref <files...>': '参考图（风格/构图）',
+  },
+  'baoyu-danger-gemini-web': {
+    '--prompt, -p': '提示词文本',
+    '--promptfiles <files...>': '从文件读取提示词（拼接）',
+    '--model, -m': '模型选择',
+    '--image [path]': '生成图片',
+    '--reference, --ref': '参考图（视觉输入）',
+    '--sessionId': '多轮会话 ID',
+    '--list-sessions': '列出已保存会话',
+    '--json': 'JSON 输出',
+    '--login': '刷新 Cookie',
+    '--cookie-path': '自定义 Cookie 文件',
+    '--profile-dir': 'Chrome 配置目录',
+  },
+  'baoyu-danger-x-to-markdown': {
+    '<url>': 'Tweet 或文章 URL',
+    '-o <path>': '输出路径',
+    '--json': 'JSON 输出',
+    '--download-media': '下载图片/视频素材',
+    '--login': '仅刷新 Cookie',
+  },
+  'baoyu-image-gen': {
+    '--prompt <text>, -p': '提示词文本',
+    '--promptfiles <files...>': '从文件读取提示词（拼接）',
+    '--image <path>': '输出图片路径',
+    '--batchfile <path>': 'JSON 批量文件',
+    '--jobs <count>': '批量模式工作线程数',
+    '--provider google': '强制指定 Provider',
+    '--model <id>, -m': '模型 ID',
+    '--ar <ratio>': '宽高比（如 16:9）',
+    '--size <WxH>': '图片尺寸（如 1024x1024）',
+    '--quality normal': '质量预设',
+    '--imageSize 1K': '图片尺寸',
+    '--ref <files...>': '参考图片',
+    '--n <count>': '图片数量',
+    '--json': 'JSON 输出',
+  },
+  'baoyu-infographic': {
+    '--layout': '布局类型（21种）',
+    '--style': '视觉风格（20种）',
+    '--aspect': '尺寸规格',
+    '--lang': '输出语言',
+  },
+  'baoyu-slide-deck': {
+    '--style <name>': '视觉风格',
+    '--audience <type>': '目标受众',
+    '--lang <code>': '输出语言',
+    '--slides <number>': '目标幻灯片数量',
+    '--outline-only': '仅生成大纲',
+    '--prompts-only': '生成大纲+提示词',
+    '--images-only': '从已有大纲生成图片',
+    '--regenerate <N>': '重新生成指定幻灯片',
+    'Content': '内容',
+    '< 1000 words': '字数 < 1000',
+    '1000-3000 words': '字数 1000-3000',
+    '3000-5000 words': '字数 3000-5000',
+    '> 5000 words': '字数 > 5000',
+  },
+  'baoyu-url-to-markdown': {
+    '<url>': '待抓取的 URL',
+    '-o <path>': '输出文件路径',
+    '--output-dir <dir>': '基础输出目录',
+    '--wait': '等待用户信号',
+    '--timeout <ms>': '页面加载超时（毫秒）',
+    '--download-media': '下载图片/视频素材',
+  },
+  'baoyu-xhs-images': {
+    '--style <name>': '视觉风格（11种）',
+    '--layout <name>': '版式类型（8种）',
+    '--preset <name>': '风格+版式快捷方式',
+  },
+  'baoyu-youtube-transcript': {
+    '<url-or-id>': 'YouTube 视频 URL 或 ID',
+    '--languages <codes>': '语言代码列表',
+    '--format <fmt>': '输出格式',
+    '-o, --output <path>': '输出文件路径',
+    '--output-dir <dir>': '输出目录',
+    '--timestamps': '包含时间戳',
+    '--transcript <type>': '字幕类型',
+    '--platform': '平台标识',
+  },
+  'ljg-card': {
+    '-l': '单张阅读卡，内容自动撑高',
+    '-i': '内容驱动的自适应视觉布局',
+    '-m': '自动切分为多张阅读卡片',
+    '-v': '手绘风格 sketchnote',
+    '-c': '日式黑白漫画风格',
+    '-w': '白板马克笔风格',
+  },
+  'ljg-paper-flow': {
+    '--input': '对话中已提供的论文链接/文件',
+    '--card': '卡片模具改用多卡模式',
+    '--infograph': '卡片模具改用信息图模式',
+  },
+  'ljg-travel': {
+    '--city': '城市名',
+    '--filter': '筛选条件（如 -f 唐代）',
+  },
+};
+
 const IMPECCABLE_NAMES = new Set([
   'audit','critique','normalize','polish','distill','harden','optimize',
   'clarify','typeset','colorize','bolder','quieter','delight','arrange',
@@ -247,7 +387,7 @@ function parseParams(content) {
   const params = [];
   for (const line of lines) {
     // 提取所有单元格（去掉首尾空单元格）
-    const cells = line.split('|').slice(1, -1).map(c => c.trim().replace(/\*\*/g, ''));
+    const cells = line.split('|').slice(1, -1).map(c => c.trim().replace(/\*\*/g, '').replace(/`/g, '').replace(/\\+$/, '').replace(/"+$/, ''));
     if (cells.length < 2) continue;
     const name = cells[0];
     const desc = cells[cells.length - 1]; // description 在最后一列
@@ -291,6 +431,12 @@ function scanSkills() {
     const shortDesc = (fm.description || '').split(/[.。]/)[0].substring(0, 80).trim();
 
     const params = parseParams(content);
+    // 应用中文参数描述（无论是否在 CHINESE_PARAMS 中，统一查表翻译）
+    const paramMap = CHINESE_PARAMS[name] || {};
+    for (const p of params) {
+      if (paramMap[p.name]) p.description = paramMap[p.name];
+      p.name = escapeHtml(p.name);
+    }
     skills.push({
       name,
       displayName: name,
