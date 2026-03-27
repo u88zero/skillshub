@@ -158,6 +158,7 @@ function makeCard(skill, index = 0) {
       <div class="card-desc${isLong ? ' expandable' : ''}">${highlight(skill.description || '暂无描述', searchQuery)}</div>
       <div class="card-actions">
         <button class="copy-btn" data-name="${skill.name}">复制 /${skill.name}</button>
+        ${skill.params && skill.params.length > 0 ? `<button class="params-badge" data-name="${skill.name}">${skill.params.length} 参数</button>` : ''}
         ${isLong ? `<button class="expand-btn" data-name="${skill.name}">展开</button>` : ''}
         <button class="detail-btn" data-name="${skill.name}">详情</button>
       </div>
@@ -240,6 +241,18 @@ function attachCardEvents() {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       openModal(btn.dataset.name);
+    });
+  });
+
+  // params badge buttons — open modal and scroll to param area
+  $$('.params-badge').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      openModal(btn.dataset.name);
+      setTimeout(() => {
+        const paramPanel = $('#modalParamPanel');
+        if (paramPanel) paramPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
     });
   });
 
