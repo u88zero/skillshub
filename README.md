@@ -5,7 +5,7 @@
 ## 启动
 
 ```bash
-cd F:\knowledge\skills-hub
+cd ~\skills-hub
 npm install
 node server.js
 ```
