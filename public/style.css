@@ -895,3 +895,40 @@ main {
   color: var(--text-muted);
   line-height: 1.5;
 }
+
+/* 卡片参数按钮行 */
+.card-param-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.card-param-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 11px;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: 'SF Mono', monospace;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.card-param-btn:hover {
+  background: rgba(250, 204, 21, 0.12);
+  border-color: rgba(250, 204, 21, 0.3);
+}
+
+.card-param-btn:active {
+  transform: scale(0.95);
+}
+
+.card-param-more {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  padding: 5px 4px;
+}

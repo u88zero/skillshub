@@ -161,6 +161,15 @@ function makeCard(skill, index = 0) {
         ${skill.params && skill.params.length > 0 ? `<button class="params-badge" data-name="${skill.name}">${skill.params.length} 参数</button>` : ''}
         ${isLong ? `<button class="expand-btn" data-name="${skill.name}">展开</button>` : ''}
         <button class="detail-btn" data-name="${skill.name}">详情</button>
+        ${skill.params && skill.params.length > 0 ? `
+        <div class="card-param-row">
+          ${skill.params.slice(0, 4).map(p => `
+            <button class="card-param-btn" data-skill="${skill.name}" data-param="${p.name}" title="${p.description}">
+              ${p.name}
+            </button>
+          `).join('')}
+          ${skill.params.length > 4 ? `<span class="card-param-more">+${skill.params.length - 4}</span>` : ''}
+        </div>` : ''}
       </div>
     </div>
   `;
@@ -241,6 +250,21 @@ function attachCardEvents() {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       openModal(btn.dataset.name);
+    });
+  });
+
+  // 卡片参数按钮 — 复制命令
+  $$('.card-param-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const skillName = btn.dataset.skill;
+      const param = btn.dataset.param;
+      const cmd = `/${skillName} ${param}`;
+      navigator.clipboard.writeText(cmd).then(() => {
+        showToast('已复制 ' + cmd);
+      }).catch(() => {
+        showToast('复制失败');
+      });
     });
   });
 
