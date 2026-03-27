@@ -207,6 +207,31 @@ function parseFrontmatter(content) {
   return result;
 }
 
+function parseParams(content) {
+  if (!content) return [];
+  // 匹配 ## 参数 或 ## Options 章节（大小写不敏感）
+  // 使用 \n## 而非 $ 来避免 multiline 模式下 $ 误匹配行尾
+  const sectionMatch = content.match(/^##\s*(参数|Options)\s*\n([\s\S]*?)(?=\n##\s)/m);
+  if (!sectionMatch) return [];
+  const tableSection = sectionMatch[2];
+  // 解析 Markdown 表格行
+  const lines = tableSection.split('\n');
+  const params = [];
+  for (const line of lines) {
+    // 提取所有单元格（去掉首尾空单元格）
+    const cells = line.split('|').slice(1, -1).map(c => c.trim().replace(/\*\*/g, ''));
+    if (cells.length < 2) continue;
+    const name = cells[0];
+    const desc = cells[cells.length - 1]; // description 在最后一列
+    if (!name || !desc) continue;
+    if (name === '参数' || name === 'Option' || name === '---') continue;
+    // 过滤分隔行（如 |------|------|）
+    if (/^-+$/.test(name)) continue;
+    params.push({ name, description: desc });
+  }
+  return params;
+}
+
 function scanSkills() {
   const now = Date.now();
   if (skillsCache.data.length && (now - skillsCache.timestamp) < CACHE_TTL) {
@@ -237,6 +262,7 @@ function scanSkills() {
     if (CHINESE_DESCS[name]) fm.description = CHINESE_DESCS[name];
     const shortDesc = (fm.description || '').split(/[.。]/)[0].substring(0, 80).trim();
 
+    const params = parseParams(content);
     skills.push({
       name,
       displayName: name,
@@ -246,6 +272,7 @@ function scanSkills() {
       invocable: fm.invocable,
       tags: getTags(fm.description, name),
       path: skillPath,
+      params,
     });
   }
 
