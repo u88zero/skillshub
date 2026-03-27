@@ -514,7 +514,25 @@ main {
 
 .card-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
+  align-items: center;
+}
+
+.card-actions > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-param-row {
+  flex-basis: 100%;
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  flex: unset;
+  min-width: unset;
 }
 
 .copy-btn {
