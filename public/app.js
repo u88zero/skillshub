@@ -290,6 +290,35 @@ function openModal(name) {
   $('#modalRaw').style.display = 'none';
   $('#modalRawBtn').textContent = '查看源码';
 
+  // 填充参数面板
+  const paramPanel = $('#modalParamPanel');
+  const paramList = $('#modalParamList');
+  if (skill.params && skill.params.length > 0) {
+    paramPanel.style.display = '';
+    paramList.innerHTML = skill.params.map(p => `
+      <button class="param-btn" data-skill="${skill.name}" data-param="${p.name}" title="${p.description}">
+        <span class="param-name">${p.name}</span>
+        <span class="param-desc">${p.description}</span>
+      </button>
+    `).join('');
+
+    // 参数按钮点击复制
+    paramList.querySelectorAll('.param-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const skillName = btn.dataset.skill;
+        const param = btn.dataset.param;
+        const cmd = param === '无参数' ? `/${skillName}` : `/${skillName} ${param}`;
+        navigator.clipboard.writeText(cmd).then(() => {
+          showToast('已复制 ' + cmd);
+        }).catch(() => {
+          showToast('复制失败');
+        });
+      });
+    });
+  } else {
+    paramPanel.style.display = 'none';
+  }
+
   $('#modalOverlay').classList.add('show');
   document.body.style.overflow = 'hidden';
 
