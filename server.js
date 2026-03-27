@@ -202,7 +202,7 @@ const CHINESE_PARAMS = {
   },
   'baoyu-danger-gemini-web': {
     '--prompt, -p': '提示词文本',
-    '--promptfiles <files...>': '从文件读取提示词（拼接）',
+    '--promptfiles': '从文件读取提示词（拼接）',
     '--model, -m': '模型选择',
     '--image [path]': '生成图片',
     '--reference, --ref': '参考图（视觉输入）',
